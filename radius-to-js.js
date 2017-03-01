@@ -10,7 +10,7 @@ let RADIUS_LOG = {
     fileFullPath: (fs.lstatSync(process.argv[2]).isDirectory ? process.argv[2] : path.join(__dirname, process.argv[2]))
 }
 
-console.log('>Staring...');
+console.log('>Starting...');
 
 //Create out output folder.
 let OUTPUT_PATH = path.join(__dirname, 'out');
@@ -21,7 +21,7 @@ if (!fs.existsSync(OUTPUT_PATH)){
 
 //Setup our file.
 let OUTPUT_FILE = path.join(OUTPUT_PATH, RADIUS_LOG.fileName + `_out.js`);
-tmp += `module.exports = {`;
+tmp += `module.exports = {${"\n"}`;
 console.log('>File init finished...');
 
 lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line, last){
@@ -50,24 +50,22 @@ lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line, last){
         if (lineArray2.length >=1 && lineArray2[1] != null && !lineArra2[1].includes('\"')){
             lineArray2[1].replace("\"", "\'");
         }
-        tmp += `${"\t"}${lineArray[0]}: {`;
-        tmp += `${"\t"}${"\tab"}${lineArray2[0]}: '${lineArray2[1]}'`;
-        tmp += `${"\t}"}`;
+        tmp += `${"\t"}${lineArray[0]}: {${"\n"}`;
+        tmp += `${"\t"}${"\tab"}${lineArray2[0]}: '${lineArray2[1]}'${"\n"}`;
+        tmp += `${"\t}"}${"\n"}`;
     }
 
     if (!lineArray[1])
-    tmp += `${"\t"}${lineArray[0]}:  ${lineArray[1]},`;
+    tmp += `${"\t"}${lineArray[0]}:  ${lineArray[1]},${"\n"}`;
 
     if (last) {
-        tmp += `}`;
+        tmp += `${"\t"}}${"\n"}}`;
+
+        fs.writeFile(OUTPUT_FILE, tmp, function(err){
+            if (err) console.log(err);
+        });
         return false;
     }
-});
-
-tmp +=`}`;
-
-fs.writeFile(OUTPUT_FILE, tmp, function(err){
-    if (err) console.log(err);
 });
 
 console.log('>Done!');
