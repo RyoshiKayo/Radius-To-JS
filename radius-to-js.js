@@ -2,7 +2,7 @@
 let fs = require('fs');
 let path = require('path');
 let lineReader = require('line-reader');
-let tmp;
+let tmp = "";
 
 let RADIUS_LOG = {
     fileName: (fs.lstatSync(process.argv[2]).isFile ? path.basename(process.argv[2]) : path.basename(process.argv[2])),
