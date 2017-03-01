@@ -20,7 +20,7 @@ if (!fs.existsSync(OUTPUT_PATH)){
 
 //Setup our file.
 let OUTPUT_FILE = path.join(OUTPUT_PATH, RADIUS_LOG.fileName) + `_out.js`;
-myWriteLine(`module.exports = {`);
+tmp += `module.exports = {`;
 console.log('>File init finished...');
 
 lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line, last){
@@ -49,31 +49,24 @@ lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line, last){
         if (lineArray2.length >=1 && lineArray2[1] != null && !lineArra2[1].includes('\"')){
             lineArray2[1].replace("\"", "\'");
         }
-        myWriteLine(`${"\t"}${lineArray[0]}: {`);
-        myWriteLine(`${"\t"}${"\tab"}${lineArray2[0]}: '${lineArray2[1]}'`);
-        myWriteLine(`${"\t}"}`);
+        tmp += `${"\t"}${lineArray[0]}: {`;
+        tmp += `${"\t"}${"\tab"}${lineArray2[0]}: '${lineArray2[1]}'`;
+        tmp += `${"\t}"}`;
     }
 
     if (!lineArray[1])
-    myWriteLine(`${"\t"}${lineArray[0]}:  ${lineArray[1]},`);
+    tmp += `${"\t"}${lineArray[0]}:  ${lineArray[1]},`;
 
     if (last) {
-        myWriteLine(`}`);
+        tmp += `}`;
         return false;
     }
 });
 
-myWriteLine(`}`);
+tmp +=`}`;
 
 fs.writeFile(OUTPUT_FILE, tmp, function(err){
     if (err) console.log(err);
 });
 
 console.log('>Done!');
-
-function myWriteLine(str){
-    tmp += str;
-    // fs.writeFileSync(OUTPUT_FILE, `${str}\n`, function(err){
-    //     if (err) console.log(`[ERR]${err}[/ERR]`);
-    // });
-}
