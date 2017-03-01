@@ -1,0 +1,19 @@
+{
+  "name": "radius-to-js",
+  "version": "1.0.0",
+  "description": "Radius to js log converter",
+  "main": "radius-to-js.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyoshiKayo/Radius-To-JS.git"
+  },
+  "author": "RyoshiKayo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RyoshiKayo/Radius-To-JS/issues"
+  },
+  "homepage": "https://github.com/RyoshiKayo/Radius-To-JS#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
+}
