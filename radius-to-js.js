@@ -4,7 +4,7 @@ let path = require('path');
 let lineReader = require('line-reader');
 let tmp = "";
 
-if (process.argv[2] = null) return console.log('No arg');
+if (process.argv[2] == null) return console.log('No arg');
 let RADIUS_LOG = {
     filename: (fs.lstatSync(process.argv[2]).isFile ? process.argv[2] : path.basename(process.argv[2])),   
     fileFullPath: (fs.lstatSync(process.argv[2]).isDirectory ? process.argv[2] : path.join(__dirname, process.argv[2]))
