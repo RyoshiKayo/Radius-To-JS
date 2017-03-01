@@ -20,7 +20,7 @@ if (!fs.exists(OUTPUT_PATH)){
 }
 
 //Setup our file.
-let OUTPUT_FILE = path.join(OUTPUT_PATH.toString, RADIUS_LOG.fileName, `_out.js`);
+let OUTPUT_FILE = path.join(OUTPUT_PATH, RADIUS_LOG.fileName, `_out.js`);
 tmp += `module.exports = {`;
 console.log('>File init finished...');
 
