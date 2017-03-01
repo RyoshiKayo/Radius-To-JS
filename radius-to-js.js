@@ -4,7 +4,7 @@ let path = require('path');
 let lineReader = require('line-reader');
 let tmp = "";
 
-if (process.argv[2] == null) return console.log('No arg');
+if (!process.argv[2]) return console.log('No arg');
 let RADIUS_LOG = {
     filename: (fs.lstatSync(process.argv[2]).isFile ? process.argv[2] : path.basename(process.argv[2])),   
     fileFullPath: (fs.lstatSync(process.argv[2]).isDirectory ? process.argv[2] : path.join(__dirname, process.argv[2]))
@@ -14,13 +14,13 @@ console.log('>Staring...');
 
 //Create out output folder.
 let OUTPUT_PATH = path.join(__dirname, 'out');
-if (!fs.exists(OUTPUT_PATH)){
+if (!fs.existsSync(OUTPUT_PATH)){
     fs.mkdir(OUTPUT_PATH);
     console.log('>Created output path...');
 }
 
 //Setup our file.
-let OUTPUT_FILE = path.join(OUTPUT_PATH, RADIUS_LOG.fileName, `_out.js`);
+let OUTPUT_FILE = path.join(OUTPUT_PATH, RADIUS_LOG.fileName + `_out.js`);
 tmp += `module.exports = {`;
 console.log('>File init finished...');
 
