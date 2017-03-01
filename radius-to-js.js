@@ -60,7 +60,7 @@ lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line, last){
 
     if (last) {
         tmp += `${"\t"}}${"\n"}}`;
-
+        console.log(tmp);
         fs.writeFile(OUTPUT_FILE, tmp, function(err){
             if (err) console.log(err);
         });
