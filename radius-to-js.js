@@ -15,7 +15,7 @@ console.log('>Starting...');
 //Create out output folder.
 let OUTPUT_PATH = path.join(__dirname, 'out');
 if (!fs.existsSync(OUTPUT_PATH)){
-    fs.mkdir(OUTPUT_PATH);
+    fs.mkdirSync(OUTPUT_PATH);
     console.log('>Created output path...');
 }
 
@@ -24,7 +24,7 @@ let OUTPUT_FILE = path.join(OUTPUT_PATH, RADIUS_LOG.fileName + `_out.js`);
 tmp += `module.exports = {${"\n"}`;
 console.log('>File init finished...');
 
-lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line, last){
+lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line, last, cb){
     if (line = null || line == "") return;
     let lineArray2 = [];
     let lineArray = line.toString().split(' ').filter(val => val !== '=');
@@ -61,10 +61,12 @@ lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line, last){
     if (last) {
         tmp += `${"\t"}}${"\n"}}`;
         console.log(tmp);
-        fs.writeFile(OUTPUT_FILE, tmp, function(err){
+        fs.writeFileSync(OUTPUT_FILE, tmp, function(err){
             if (err) console.log(err);
         });
-        return false;
+        cb(false);
+    } else {
+        cb();
     }
 });
 
