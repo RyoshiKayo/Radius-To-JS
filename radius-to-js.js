@@ -24,7 +24,7 @@ let OUTPUT_FILE = path.join(OUTPUT_PATH, RADIUS_LOG.fileName + `_out.js`);
 tmp += `module.exports = {${"\n"}`;
 console.log('>File init finished...');
 
-lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line, last, cb){
+lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line){
     if (line = null || line == "") return;
     let lineArray2 = [];
     let lineArray = line.toString().split(' ').filter(val => val !== '=');
@@ -57,17 +57,13 @@ lineReader.eachLine(RADIUS_LOG.fileFullPath, function(line, last, cb){
 
     if (!lineArray[1])
     tmp += `${"\t"}${lineArray[0]}:  ${lineArray[1]},${"\n"}`;
+}).then(function(err) {
+    if (err) throw err;
 
-    if (last) {
-        tmp += `${"\t"}}${"\n"}}`;
-        console.log(tmp);
-        fs.writeFileSync(OUTPUT_FILE, tmp, function(err){
-            if (err) console.log(err);
-        });
-        cb(false);
-    } else {
-        cb();
-    }
+    tmp += `${"\t"}}${"\n"}}`;
+    fs.writeFileSync(OUTPUT_FILE, tmp, function(err){
+        if (err) console.log(err);
+    });
 });
 
 console.log('>Done!');
