@@ -1,6 +1,6 @@
 # Radius-To-JS
 
-A simple RADIUS log file converter written in Node 6.10.0.
+A simple RADIUS log file converter written in JavaScript (requires Node 6.10.0+).
 
 Converts a RADIUS log:
 ```
