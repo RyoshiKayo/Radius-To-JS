@@ -17,7 +17,9 @@
     "console.table": "^0.8.0",
     "fs": "^0.0.1-security",
     "line-reader": "^0.4.0",
-    "path": "^0.12.7"
+    "node-sshclient-promises": "^0.3.0",
+    "path": "^0.12.7",
+    "ssh-promise": "^2.1.0"
   },
   "devDependencies": {},
   "scripts": {
